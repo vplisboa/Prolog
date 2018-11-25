@@ -43,8 +43,22 @@ contem( [X|Xs], [_|Ys]) :- contem([X|Xs],Ys).
 
 dupli(Lista,Set) :- aux(Lista,[],Set).
 aux([],Acumulator,Acumulator).
-aux([H|T],Acumulador,Set) :- member(H,Acumulador),aux(T,Acumulador,Set).
+aux([H|T],Acumulador,Set) :- membro(H,Acumulador),aux(T,Acumulador,Set).
 aux([H|T],Acumulador,Set) :- aux(T,[H|Acumulador],Set).
 
 
+%bubble sort
+ordena(Xs,Ys) :- permuta(Xs,Ys), ordenado(Ys).
+permuta([],[]).
+permuta(Xs,[Z|Zs]) :- seleciona(Z,Xs,Ys), permuta(Ys,Zs).
+ordenado([X]).
+ordenado([X,Y|Ys]) :- X=<Y, ordenado([Y|Ys]).
+seleciona(X,[X|Xs],Xs).
+seleciona(X,[Y|Ys],[Y|Zs]) :- seleciona(X,Ys,Zs).
 
+%quicksort
+quicksort([],[]).
+quicksort([X|Xs],Ys) :- particao(Xs,X,Infs,Sups), quicksort(Infs,Is),quicksort(Sups,Ss),concat(Is,[X|Bs],Ys).
+particao([],Y,[],[]).
+particao([X|Xs],Y,[X|Is],Ss) :- X=<Y, particao(Xs,Y,Is,Ss).
+particao([X|Xs],Y,Is,[X|Ss]) :- X>Y, particao(Xs,Y,Is,Ss).
