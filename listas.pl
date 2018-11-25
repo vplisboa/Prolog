@@ -1,7 +1,7 @@
 %lista([] )<-.
 %lista([X|Y] )<-lista(Y).
 
-membro(X,[X|Z]) :- fail, !.
+membro(X,[X|Z]).
 membro(X,[Y|Z]) :- membro(X,Z).
 
 prefixo([], _).
