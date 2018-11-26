@@ -16,3 +16,15 @@ procurar(Key,t(_,_,R)) :- procurar(Key,R).
 
 istree(nill).
 istree(t(_,R,L)) :- istree(R),istree(L).
+
+concat([], Ys, Ys).
+concat([X,Xs],Ys,[X,Zs]) :- concat(Xs,Ys,Zs).
+
+%list_filhos_esq(t(a,t(b,t(c,nil,nil),nil),t(d,t(e,t(f,nil,nil),nil),t(g,nil,nil))),Ys).
+
+list_esq_aux(nil, []).
+list_esq_aux(t(Key, nil, nil), [Key]).
+list_esq_aux(t(Key, L, R), List):- list_esq_aux(L, EsqList),list_filhos_esq(R, DirList),append([Key|EsqList], DirList, List).
+list_filhos_esq(nil, []).
+list_filhos_esq(t(Key, nil, nil), []).
+list_filhos_esq(t(_, L, R), List):- list_esq_aux(L, EsqList),	list_filhos_esq(R, DirList),append(EsqList, DirList, List).

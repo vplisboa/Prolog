@@ -38,8 +38,8 @@ remover([X,X|T],[X|T]) :- !.
 remover([X|Xs],Res) :- remover(Xs,Res0), append([X],Res0,Res).
 
 contem([],_).
-contem( [X|Xs], [X|Ys]) :- contem(Xs,Ys).
-contem( [X|Xs], [_|Ys]) :- contem([X|Xs],Ys).
+contem([X|Xs], [X|Ys]) :- contem(Xs,Ys).
+contem([X|Xs], [_|Ys]) :- contem([X|Xs],Ys).
 
 dupli(Lista,Set) :- aux(Lista,[],Set).
 aux([],Acumulator,Acumulator).
